@@ -1,0 +1,130 @@
+
+.lending-portfolio-modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #030303;;
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.lending-portfolio-modal_table {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.lending-portfolio-modal_cell {
+    display: table-cell;
+    padding: 0 1em;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.lending-portfolio-modal_window {
+    display: inline-block;
+    position: relative;
+    padding: 0px;
+    max-width: 50em;
+    background: #B47526;
+    opacity: 0.9;
+    width: 40em;
+    height: 18em;
+}
+
+.lending-portfolio_modal_image {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.lending-portfolio-modal_bg_img {
+    margin: 0;
+    width: 8em;
+    display: block;
+    border: none;
+    height: 8em;
+    box-shadow: 0 0 0 0.5em #C67515, 0 0 0 1em white;
+}
+
+
+.lending-portfolio-modal_left-arrow, .lending-portfolio-modal_right-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -1.25em;
+}
+
+.lending-portfolio-modal_right-arrow {
+    right: 10px;
+}
+
+.lending-portfolio-modal_left-arrow {
+    left: 10px;
+
+}
+
+.icon-arrow-left, .icon-arrow-right {
+    font-size: 2.5em;
+}
+
+.lending-portfolio-modal_img-container {
+    position: absolute;
+    height: 100%;
+    left: 5%;
+    margin: 0px;
+    width: 185px;
+    background: #5A3A13;
+}
+
+.lending-portfolio-modal_content-container {
+    position: absolute;
+    right: 18%;
+    height: 100%;
+    display: table;
+    width: 50%;
+}
+
+.lending-portfolio-modal_align {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.lending-portfolio-modal_left-arrow, .lending-portfolio-modal_right-arrow {
+    cursor: pointer;
+    color: white;
+}
+
+.lending-portfolio-modal_align p {
+    color: white;
+    margin-left: -7em;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.68);
+    font-family: Verdana;
+    font-size: 18px; 
+}
+
+.lending-portfolio-modal_align ul {
+    color: white;
+    text-align: left;
+    font-family: Verdana;
+    font-size: 18px; 
+}
+
+.lending-portfolio-modal_bg-line {
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    margin-top: -4.5em;
+}
+
+.lending-portfolio-modal_cell .icon-denied {
+    float: right;
+    color: white;
+    margin-top: -3%;
+    margin-right: 5%;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+

@@ -1,0 +1,1226 @@
+@import "reset"
+@import "fonts"
+
+a
+  color: white
+  padding: 0
+  &:hover,
+  &:active
+    text-decoration: none
+    color: white
+
+//***********************
+// Variables
+//***********************
+
+
+$mainFont: Verdana, Arial, Helvetica, sans-serif
+
+$mainColor: #fea747
+$mainColor2: #cc8135
+$mainColorHover: #ec841b
+$buttonHoverColor: #eba24a
+$layoutColor: #dcdcdc
+$buttonColor: #878787
+$buttonColor2: #6f6f6f
+$buttonColorHover: #313131
+$buttonColor3: #b1a3a3
+$editImageButtonColor: #ddd
+$iconColor: #353535
+$linkedInColor: #b9b9b9
+$activeItem: #f0f0f0
+$sectionTextColor: #000
+$sectionItemSepLineColor: #ecedf1
+$sectionItemColor: #fff
+$errorColor: #e22028
+$errorColor2: #eb1c24
+$acceptColor: #5ebd57
+//*************************
+// Common
+//************************
+
+
+%section
+  padding-top: 83px
+  padding-bottom: 7px
+  color: $sectionTextColor
+
+%section__container
+  padding: 0
+
+%section__title
+  font-size: 25px
+  padding-left: 46px
+  margin-bottom: 21px
+
+%section__add-button
+  text-align: right
+  font-size: 37px
+  cursor: pointer
+  color: $buttonColor
+  padding-right: 32px
+  transform: translateY(-8px)
+  transition: all 0.3s ease-in
+  &:hover
+    color: $iconColor
+
+%section__item
+  background-color: $sectionItemColor
+  position: relative
+  padding-left: 35px
+  padding-bottom: 31px
+  box-shadow: inset 0 0 0 $mainColor
+  transition: all 0.3s ease-in
+  overflow: auto
+  &:after,
+  &:before
+    content: ''
+    box-shadow: 0 0 0 0 rgba(0,0,0, 0.5)
+    transition: box-shadow 0.3s ease-in, opacity 0.3s ease-in
+  &:before
+    left: 10%
+    position: absolute
+    height: 2px
+    display: block
+    width: 80%
+    background-color: $sectionItemSepLineColor
+    top: 0
+  &:first-child
+    &:before
+      display: none
+
+@media(min-width: 768px)
+  %section__item
+    &:hover
+      background-color: $activeItem
+      box-shadow: inset 6px 0 0 $mainColor
+      &:after
+        box-shadow: 0 0 50px -10px rgba(0,0,0, 0.5)
+        position: absolute
+        background-color: transparent
+        height: 100%
+        width: 100%
+        z-index: 1
+        top: 0
+        left: 0
+      &:before
+        opacity: 0
+
+@mixin section__item_hover($name)
+  @media(min-width: 768px)
+    &:hover
+      & + .#{$name}__item:before
+        opacity: 0
+      & .#{$name}-item__buttons
+        opacity: 1
+        position: relative
+        z-index: 2
+
+%section-item__image
+  float: left
+  margin-top: 35px
+  height: 175px
+  width: 175px
+
+%section-item__title
+  font-size: 20px
+  font-weight: bold
+  margin: 36px 0 25px 25px
+  display: inline-block
+
+%section-item__visible-icon
+  font-size: 22px
+  margin-left: 16px
+  transform: translateY(3px)
+  display: inline-block
+
+%section-item__visible-icon_visible
+  @extend %section-item__visible-icon
+  color: $mainColor2
+
+%section-item__visible-icon_hide
+  @extend %section-item__visible-icon
+  color: $sectionTextColor
+
+%section-item__buttons
+  float: right
+  margin-top: 20px
+  font-size: 30px
+  color: $buttonColor
+  transition: all 0.3s ease-in
+  opacity: 0
+  & > span
+    cursor: pointer
+    transition: all .3s ease-in
+    &:hover
+      color: $buttonHoverColor
+
+%section-item__edit-button
+  margin-right: 12px
+  font-size: 28px  
+
+%section-item__text
+  font-size: 16px
+  margin-left: 200px
+  padding-right: 10px
+  line-height: 1.6
+  letter-spacing: -0.015em
+
+%section__more-button
+  padding: 0
+  width: 0
+  height: 0
+  border-left: 10px solid transparent
+  border-right: 10px solid transparent
+  border-top: 10px solid $buttonColor
+  float: right
+  margin-top: 20px
+  margin-right: 22px
+  cursor: pointer
+  transition: all .3s ease-in
+  &:hover
+    border-top: 10px solid $iconColor
+
+//************************
+// Styles
+//************************
+
+
+.admin
+  font-family: $mainFont
+  background-color: $layoutColor
+
+.admin__header
+  background: $sectionTextColor
+  position: relative
+  //height: 270px
+
+.admin-header__container
+  height: 100%
+  padding-bottom: 80px
+  background:
+    image: url("../img/header__bg.jpg"), linear-gradient(to bottom, rgba(0,0,0,.27), rgba(0,0,0,.27))
+    position: center center
+    repeat: no-repeat
+    size: cover
+
+
+.admin-header__logo
+  margin-top: 73px
+  color: $mainColor
+  font-size: 15px
+  padding-left: 0
+  text-align: right
+
+.admin-header-logo__text
+  display: inline-block
+  width: 178px
+  margin-bottom: 8px
+  letter-spacing: 0.03em
+
+.admin-header__lang-switch-wrap
+  display: none
+  color: $buttonColor3
+
+.admin-header__lang-switch
+  font-size: 16px
+  color: $buttonColor3
+  cursor: pointer
+
+.admin-header__lang-switch_active
+  @extend .admin-header__lang-switch
+  color: $mainColor
+
+.admin-header__menu-wrap
+  margin-top: 35px
+  text-align: right
+  padding-right: 0
+
+.admin-header__search
+  position: relative
+
+.admin-header-search__icon
+  position: absolute
+  font-size: 20px
+  top: 50%
+  transform: translate(-150%,-50%)
+  color: $buttonColor3
+  cursor: pointer
+
+.admin-header-search__input
+  height: 45px
+  width: 335px
+  background: linear-gradient(to bottom, rgba(251,251,251,.25), rgba(251,251,251,.25))
+  border: none
+  border-radius: 3px
+  padding-right: 40px
+  color: $sectionItemColor
+  text-align: right
+  &:focus
+    outline: none
+
+.admin-header__menu
+  color: $sectionItemColor
+  font-size: 20px
+  padding-right: 0
+  margin-top: 25px
+
+.list-inline>li.admin-header-menu__item
+  padding: 0
+
+.admin-header-menu__item
+  position: relative
+  margin-left: 39px
+  cursor: pointer
+  & a
+    position: relative
+    &:after
+      position: absolute
+      top: 25px
+      left: 0
+      content: ""
+      width: 0
+      opacity: 0
+      transition: all .2s linear
+      border-bottom: 3px solid $mainColor
+    &:hover
+      &:after
+        width: 100%
+        opacity: 1
+
+.admin-header-menu__item_no-hover
+  &:hover
+    &:after
+      width: 0
+      opacity: 0
+
+
+.admin-header-menu-item__lang-switch
+  @extend .admin-header__lang-switch
+  
+.admin-header-menu-item__lang-switch_active
+  @extend .admin-header__lang-switch_active
+
+  
+.admin-header__edit-button
+  color: $sectionItemColor
+  opacity: .25
+  font-size: 21px
+  text-align: right
+  margin-top: 42px
+  padding-right: 5px
+  cursor: pointer
+  transition: all .3s ease-in
+  &:hover
+    color: $mainColor2
+    opacity: 1
+
+
+//*******************************
+// Services
+//******************************
+  
+  
+.admin__services
+  @extend %section
+
+.admin-services__container
+  @extend %section__container
+
+.admin-services__title
+  @extend %section__title
+
+.admin-services__add-button
+  @extend %section__add-button
+
+.admin-services__item
+  @extend %section__item
+
+
+.admin-services__item
+  @include section__item_hover(admin-services)
+
+.admin-services-item__image
+  @extend %section-item__image
+
+.admin-services-item__title
+  @extend %section-item__title
+
+.admin-services-item__visible-icon
+  &_hide
+    @extend %section-item__visible-icon_hide
+  &_visible
+    @extend %section-item__visible-icon_visible
+
+.admin-services-item__buttons
+  @extend  %section-item__buttons
+
+.admin-services-item__edit-button
+  @extend %section-item__edit-button
+
+.admin-services-item__text
+  @extend %section-item__text
+
+.admin-services__more-button
+  @extend %section__more-button
+
+//************************
+//Portfolio
+//************************
+
+.admin__portfolio
+  @extend %section
+
+.admin-portfolio__container
+  @extend %section__container
+
+.admin-portfolio__title
+  @extend %section__title
+  margin-bottom: 30px
+
+.admin-portfolio__add-button
+  @extend %section__add-button
+
+.admin-portfolio__item
+  @extend %section__item
+
+.admin-portfolio__item
+  @include section__item_hover(admin-portfolio)
+
+.admin-portfolio-item__image
+  @extend %section-item__image
+
+.admin-portfolio-item__title
+  @extend %section-item__title
+
+.admin-portfolio-item__visible-icon
+  &_hide
+    @extend %section-item__visible-icon_hide
+  &_visible
+    @extend %section-item__visible-icon_visible
+
+.admin-portfolio-item__buttons
+  @extend %section-item__buttons
+
+.admin-portfolio-item__edit-button
+  @extend %section-item__edit-button
+
+.admin-portfolio-item__text
+  @extend %section-item__text
+
+.admin-portfolio__more-button
+  @extend %section__more-button
+
+//*******************************
+//About US
+//*******************************
+
+.admin__about-us
+  @extend %section
+
+.admin-about-us__container
+  @extend %section__container
+
+.admin-about-us__title
+  @extend %section__title
+  padding-left: 46px
+  margin-bottom: 30px
+
+.admin-about-us__team-descr
+  padding: 0
+  margin-bottom: 42px
+
+.admin-about-us-team-descr__item
+  background-color: $sectionItemColor
+  position: relative
+  padding-left: 35px
+  padding-bottom: 5px
+  overflow: auto
+
+.admin-about-us-team-descr__title
+  font-size: 20px
+  padding-left: 46px
+  margin-bottom: 15px
+
+.admin-about-us-team-descr-item__image-wrap
+  position: relative
+  z-index: 1
+  float: left
+  margin-top: 35px
+  overflow: hidden
+  &:hover
+    .admin-about-us-team-descr-item-image__buttons
+      height: 25%
+
+.admin-about-us-team-descr-item-image__buttons
+  position: absolute
+  bottom: 0
+  height: 0
+  width: 100%
+  background-color: rgba(black, .5)
+  text-align: right
+  padding-right: 15px
+  color: $editImageButtonColor
+  transition: all .3s ease-in
+
+
+.admin-about-us-team-descr-item-image__button
+  line-height: 2.5
+  display: inline-block
+  font-size: 20px
+  transition: all .3s ease-in
+  &.icon-download
+    margin-right: 15px
+  &:hover
+    transform: scale(1.3)
+    color: $buttonHoverColor
+
+
+.admin-about-us-team-descr-item__image
+  @extend %section-item__image
+  margin-top: 0
+
+.admin-about-us-team-descr-item__title
+  @extend %section-item__title
+  margin: 38px 0 15px 25px
+
+.admin-about-us-team-descr-item__symbol-num
+  font-size: 12px
+  float: right
+  margin-top: 35px
+  margin-bottom: 15px
+
+.admin-about-us-team-descr-item__text
+  @extend %section-item__text
+  padding-right: 0
+  height: 110px
+  margin-left: 10px
+  letter-spacing: -.02em
+  display: inherit
+  resize: none
+  border: none
+  transition: all 0.3s ease-in
+
+  &:focus
+    border: 1px solid $buttonColor
+    outline: none
+
+.admin-about-us-team-descr-item__buttons-wrap
+  text-align: right
+  padding-right: 39px
+  transform: translateY(-10px)
+
+.admin-about-us-team-descr-item__save-button
+  height: 38px
+  width: 113px
+  text-align: center
+  border: none
+  color: #fff
+  border-radius: 3px
+  background-color: $buttonColor2
+  transition: all 0.3s ease-in
+  font-size: 20px
+  &:hover
+    background-color: $mainColorHover
+
+.admin-about-us-team-descr-item__cancel-button
+  @extend .admin-about-us-team-descr-item__save-button
+  margin-left: 10px
+  &:hover,
+  &:focus
+    background-color: $buttonColorHover
+    outline: none
+
+.admin-about-us__member-descr
+  padding: 0
+
+.admin-about-us-member-descr__title
+  padding-left: 46px
+  margin-bottom: 19px
+  font-size: 20px
+
+
+.admin-about-us-member-descr__add-button
+  @extend %section__add-button
+
+.admin-about-us-member-descr__item
+  @extend %section__item
+  padding-bottom: 15px
+
+.admin-about-us-member-descr__item
+  @include section__item_hover(admin-about-us-member-descr)
+
+.admin-about-us-member-descr-item__image-wrap
+  float: left
+  position: relative
+  
+.admin-about-us-member-descr-item__image
+  @extend %section-item__image
+  float: none
+  display: block
+
+
+.admin-about-us-member-descr-item__date
+  color: $buttonColor2
+  margin-top: 4px
+  display: inline-block
+
+.admin-about-us-member-descr-item__title
+  @extend %section-item__title
+  margin: 36px 0 5px 25px
+
+.admin-about-us-member-descr-item__visible-icon
+  &_hide
+    @extend %section-item__visible-icon_hide
+  &_visible
+    @extend %section-item__visible-icon_visible
+
+.admin-about-us-member-descr-item__buttons
+  @extend %section-item__buttons
+
+.admin-about-us-member-descr-item__edit-button
+  @extend %section-item__edit-button
+
+.admin-about-us-member-descr-item__role
+  margin: 10px 0 20px 200px
+  font-style: italic
+
+.admin-about-us-member-descr-item__text
+  @extend %section-item__text
+
+.admin-about-us-member-descr-item__linkedin
+  margin: 16px 0 0 203px
+
+.admin-about-us-member-descr-item-linkedin__icon
+  font-size: 22px
+  color: $linkedInColor
+  margin-right: 10px
+
+
+.admin-about-us-member-descr-item-linkedin__link
+  color: $linkedInColor
+  font-size: 16px
+  position: relative
+  z-index: 2
+  transition: all .3s ease-in
+  &:hover
+    text-decoration: none
+    color: $buttonColor
+
+.admin-about-us-member-descr__more-button
+  @extend %section__more-button
+
+
+//*****************************
+//News
+//*****************************
+
+.admin__news
+  @extend %section
+
+.admin-news__container
+  @extend %section__container
+
+.admin-news__title
+  @extend %section__title
+
+.admin-news__add-button
+  @extend %section__add-button
+
+.admin-news__item
+  @extend %section__item
+
+.admin-news__item
+  @include section__item_hover(admin-news)
+
+.admin-news-item__image
+  @extend %section-item__image
+
+.admin-news-item__title
+  @extend %section-item__title
+  margin: 36px 0 5px 25px
+
+.admin-news-item__date
+  color: $buttonColor2
+  margin: 5px 0 20px 200px
+
+.admin-news-item__buttons
+  @extend %section-item__buttons
+
+.admin-news-item__edit-button
+  @extend %section-item__edit-button
+
+.admin-news-item__text
+  @extend %section-item__text
+
+.admin-news__more-button
+  @extend %section__more-button
+
+
+//*************************
+//Contact Us
+//*************************
+
+.admin__contact-us
+  @extend %section
+  padding-top: 110px
+
+
+.admin-contact-us__container
+  @extend %section__container
+
+.admin-contact-us__title
+  @extend %section__title
+  padding-left: 33px
+  margin-bottom: 30px
+
+.admin-contact-us__phone
+  padding: 0
+  .row
+    padding: 0 15px
+  display: flex
+  align-items: center
+
+
+.admin-contact-us-phone__icon-wrap
+  width: 80px
+  height: 68px
+  background-color: $mainColor2
+  display: flex
+  border-radius: 3px
+  justify-content: center
+  align-items: center
+
+.admin-contact-us-phone__input-icon
+  color: #fff
+  font-size: 35px
+
+.admin-contact-us-phone__input-wrap
+  padding-left: 0
+
+.admin-contact-us-phone__text
+  font-size: 12px
+  margin-bottom: 8px
+  color: $buttonColor
+
+.admin-contact-us-phone__symbol-num
+  @extend .admin-contact-us-phone__text
+  text-align: right
+
+.admin-contact-us-phone__input
+  height: 68px
+  width: 97%
+  border: none
+  margin-left: 10px
+  padding-left: 15px
+  &:focus
+    outline: none
+    background-color: $activeItem
+
+%admin-contact-us__error
+  text-align: right
+  font-size: 12px
+  margin-top: 8px
+  color: $errorColor
+
+.admin-contact-us-phone__error
+  @extend %admin-contact-us__error
+  opacity: 0
+
+.admin-contact-us-phone__icon
+  &_accept
+    color: $acceptColor
+    margin-left: -15px
+  &_error
+    color: $errorColor2
+    margin-left: -15px
+
+.admin-contact-us-phone__text-wrap
+  position: relative
+  overflow: auto
+  display: flex
+  align-items: flex-end
+
+.admin-contact-us-email__text-wrap
+  @extend .admin-contact-us-phone__text-wrap
+
+
+.admin-contact-us__email
+  @extend .admin-contact-us__phone
+  margin-top: 25px
+
+.admin-contact-us-email__icon-wrap
+  @extend .admin-contact-us-phone__icon-wrap
+
+.admin-contact-us-email__input-icon
+  @extend .admin-contact-us-phone__input-icon
+
+.admin-contact-us-email__input-wrap
+  @extend .admin-contact-us-phone__input-wrap
+
+.admin-contact-us-email__text
+  @extend .admin-contact-us-phone__text
+
+.admin-contact-us-email__symbol-num
+  @extend .admin-contact-us-phone__symbol-num
+
+.admin-contact-us-email__error
+  @extend %admin-contact-us__error
+
+.admin-contact-us-email__input
+  @extend .admin-contact-us-phone__input
+
+.admin-contact-us-email__icon
+  &_accept
+    @extend .admin-contact-us-phone__icon_accept
+  &_error
+    @extend .admin-contact-us-phone__icon_error
+
+.admin-contact-us__buttons-wrap
+  margin-top: 60px
+  text-align: right
+  padding-right: 21%
+
+.admin-contact-us__save-button
+  height: 38px
+  width: 113px
+  text-align: center
+  border: none
+  color: #fff
+  border-radius: 3px
+  background-color: $buttonColor2
+  transition: all 0.3s ease-in
+  font-size: 20px
+  &:hover
+    background-color: $mainColor2
+
+.admin-contact-us__cancel-button
+  @extend .admin-contact-us__save-button
+  margin-left: 10px
+  &:hover,
+  &:focus
+    background-color: $buttonColorHover
+    outline: none
+
+//************************
+// Media queries
+//************************
+
+
+@media (min-width: 768px) and (max-width: 1170px)
+  .admin-about-us-team-descr-item__text
+    width: 75%
+@media (min-width: 768px) and (max-width: 1199px)
+  .admin-header__container
+    padding-bottom: 30px
+
+  .admin-header__logo
+    margin-top: 30px
+
+  .admin-header-logo__image
+    width: 130px
+
+  .admin-header-logo__text
+    width: 130px
+
+  .admin-header__lang-switch-wrap
+    display: block
+    text-align: right
+    margin-top: 100px
+    position: relative
+    z-index: 2
+
+  .admin-header__menu-wrap
+    width: 100%
+    margin-top: -47px
+
+  .admin-header__search
+    text-align: center
+    transform: translateX(4%)
+
+  .admin-header-menu__list
+    display: flex
+    justify-content: space-between
+
+  .admin-header-menu__item
+    margin-left: 0
+    &.admin-header-menu__item_no-hover
+      display: none
+
+@media (min-width: 768px) and (max-width: 992px)
+  .admin-contact-us-email__input-wrap
+    margin-top: -10px
+
+@media (max-width: 767px)
+
+  %section
+    padding-top: 30px
+
+  %section__container,
+  .admin-header__logo
+    padding: 15px
+
+  %section__item
+    padding-bottom: 70px
+
+  %section-item__image
+    margin-bottom: 15px
+
+  %section-item__buttons
+    position: absolute
+    bottom: 20px
+    right: 20px
+    opacity: 1
+
+  %section-item__edit-button
+    margin-right: 35px
+
+  %section-item__visible-icon
+    margin-left: 0
+    transform: translateY(0)
+    position: absolute
+    bottom: 20px
+    right: 165px
+
+  %section-item__text
+    margin-left: 0
+    display: block
+    clear: both
+    padding-right: 0
+    letter-spacing: 0
+
+  .admin-header__logo
+    margin-top: 0
+    position: relative
+    float: none
+    text-align: center
+    left: 48%
+    transform: translateX(-50%)
+
+  .admin-header-logo__image
+    width: 120px
+
+  .admin-header-logo__text
+    width: 120px
+
+  .admin-header__container
+    padding-bottom: 0
+    background-size: 160%
+    background-position: center top
+
+  .admin-header__lang-switch-wrap
+    position: absolute
+    top: 20px
+    right: 25px
+    display: block
+
+  .admin-header__edit-button
+    position: absolute
+    bottom: 20px
+    right: 25px
+    padding: 0
+    margin: 0
+
+
+  .admin-header__toggle-button
+    position: relative
+    color: white
+    float: left
+    margin-left: 15px
+    margin-top: -45px
+    &[aria-expanded="true"]
+      .admin-header-toggle-button-icon__top-line
+        top: 6px
+        transform: rotate(135deg)
+      .admin-header-toggle-button-icon__center-line
+        top: 4px
+        transform: rotate(-135deg)
+      .admin-header-toggle-button-icon__bottom-line
+        opacity: 0
+        top: 0
+        transform: rotate(90deg)
+
+  $toggleMenuLineWidth: 25px
+  $toggleMenuLineHeight: 2px
+
+  .admin-header-toggle-button__icon
+    width: $toggleMenuLineWidth
+    height: $toggleMenuLineWidth
+    position: relative
+
+  .admin-header-toggle-button-icon__top-line
+    display: block
+    position: relative
+    top: 0
+    width: $toggleMenuLineWidth
+    height: $toggleMenuLineHeight
+    background: rgb(255, 255, 255)
+    border: none
+    border-radius: 4px 4px 4px 4px
+    transition: transform 0.5s, top 0.2s
+    display: block
+    transition-delay: 0.2s, 0s
+
+  .admin-header-toggle-button-icon__center-line
+    position: relative
+    width: $toggleMenuLineWidth
+    height: $toggleMenuLineHeight
+    top: $toggleMenuLineHeight * 2.3
+    background: rgb(255, 255, 255)
+    border: none
+    border-radius: 4px 4px 4px 4px
+    transition: transform 0.5s, top 0.2s
+    transition-delay: 0.2s, 0s
+    display: block
+
+  .admin-header-toggle-button-icon__bottom-line
+    position: relative
+    width: $toggleMenuLineWidth
+    height: $toggleMenuLineHeight
+    top: $toggleMenuLineHeight * 5
+    background: rgb(255, 255, 255)
+    border: none
+    border-radius: 4px 4px 4px 4px
+    transition: all 0.5s, opacity 0.2s
+    transition-delay: 0.1s
+    display: block
+
+  .admin-header__search
+    top: 265px
+    margin: auto
+    max-width: 335px
+
+  .admin-header-search__input
+    width: 99%
+    background: linear-gradient(to bottom, rgba(4,4,4,.25), rgba(4,4,4,.25))
+    font-size: 14px
+    height: 35px
+    color: #000
+    &::-webkit-input-placeholder
+      color: #000
+    
+  .admin-header-search__icon
+    color: #000
+
+  .admin-header__menu
+    transform: translateY(-45px)
+    padding-left: 15px
+
+  .admin-header__menu-wrap
+    position: absolute
+    z-index: 2
+    margin-top: 0
+    padding: 15px
+    width: 100%
+    background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,1))
+    box-shadow: 0 0 50px -10px rgba(0,0,0, 0.5)
+
+  .admin-header-menu__list>.admin-header-menu__item
+    display: block
+    text-align: left
+    margin: 15px 0
+    &.admin-header-menu__item_no-hover
+      display: none
+    & a
+      color: #000
+      font-size: 16px
+
+  .admin-about-us-team-descr-item__image-wrap
+    overflow: visible
+
+  .admin-about-us-team-descr-item__image
+    margin-bottom: 0
+
+  .admin-about-us-team-descr-item-image__buttons
+    height: 25%
+    background-color: transparent
+    position: static
+    clear: both
+    color: $buttonColor
+
+  .admin-about-us-team-descr-item-image__button
+    &:hover
+      transform: scale(1)
+      color: $buttonColor
+
+  .admin-about-us-team-descr-item__text
+    width: 100%
+    height: 163px
+
+  .admin-about-us-team-descr-item__buttons-wrap
+    text-align: center
+    padding-right: 15px
+    margin-bottom: 15px
+    transform: none
+    float: none
+
+  .admin-about-us-team-descr-item__save-button
+    margin: 0 18px
+
+  .admin-about-us-member-descr-item__date
+    position: absolute
+    width: 100%
+    bottom: 0
+    margin-left: 20px
+    transform: translate(100%,-100%)
+    
+  .admin-about-us-member-descr-item-linkedin__icon,
+  .admin-about-us-member-descr-item-linkedin__link
+    color: $buttonColor2
+
+  .admin-contact-us-phone__icon
+    &_accept,
+    &_error
+      margin-left: 0
+
+  .admin-contact-us-phone__text
+    padding-right: 0
+
+  .admin-contact-us-email__input-wrap
+    margin-top: -10px
+
+  .admin-contact-us__buttons-wrap
+    padding-right: 15px
+    text-align: center
+
+  .admin-contact-us__save-button
+    margin: 0 18px
+
+@media(max-width: 663px)
+  .admin-about-us-team-descr-item__text
+    width: 100%
+    height: 160px
+    margin-left: 0
+    padding-left: 0
+
+
+
+@media(max-width: 480px)
+  %section__item
+    padding-left: 15px
+    padding-bottom: 45px
+
+  %section__title
+    padding-left: 30px
+    font-size: 18px
+
+  %section-item__image
+    width: 85px
+    height: 85px
+
+  %section__add-button
+    font-size: 27px
+
+  %section-item__buttons
+    font-size: 18px
+
+  %section-item__edit-button
+    font-size: 18px
+
+  %section-item__title
+    font-size: 16px
+
+  %section-item__visible-icon
+    font-size: 18px
+    right: 135px
+
+  %section-item__text
+    font-size: 14px
+
+  %section__more-button
+    margin-right: 13px
+
+  .admin-header-logo__image
+    width: 90px
+
+  .admin-header-logo__text
+    width: 90px
+    font-size: 10px
+
+  .admin-header-search__icon
+    font-size: 17px
+
+
+  .admin-about-us-team-descr__title,
+  .admin-about-us-member-descr__title
+    padding-left: 30px
+    font-size: 15px
+
+  .admin-about-us-team-descr__item
+    padding-left: 15px
+
+  .admin-about-us-team-descr-item__image-wrap
+    margin-top: 35px
+
+  .admin-about-us-team-descr-item__text
+    height: 170px
+    margin-left: 0
+    width: 100%
+
+  .admin-about-us-team-descr-item__buttons-wrap
+    text-align: center
+
+  .admin-about-us-team-descr-item__save-button
+    width: 85px
+    height: 30px
+    font-size: 16px
+
+  .admin-about-us-member-descr-item__linkedin
+    margin: 15px 0 15px 110px
+
+  .admin-about-us-member-descr-item-linkedin__icon
+    font-size: 22px
+    margin-right: 0
+
+  .admin-about-us-member-descr-item-linkedin__link
+    font-size: 12px
+
+  .admin-about-us-member-descr-item__role
+    margin: 5px 0 20px 110px
+    font-size: 14px
+
+  .admin-about-us-member-descr-item__date
+    font-size: 12px
+
+  .admin-news-item__date
+    margin: 5px 0 10px 110px
+    font-size: 14px
+
+  .admin-contact-us-phone__text,
+  .admin-contact-us-phone__error
+    font-size: 10px
+    letter-spacing: -0.05em
+    padding: 0
+
+  .admin-contact-us-phone__input-icon
+    font-size: 16px
+
+  .admin-contact-us-phone__input-wrap
+    width: 100%
+    padding-right: 0
+    padding-left: 5px
+
+  .admin-contact-us-phone__input
+    margin-left: 0
+    width: 100%
+    font-size: 13px
+    height: 40px
+
+  .admin-contact-us-phone__icon-wrap
+    width: 50px
+    height: 40px
+
+  .admin-contact-us-phone__icon
+    &_accept,
+    &_error
+      display: none
+
+  .admin-contact-us__save-button
+    width: 85px
+    height: 30px
+    font-size: 16px
+
+@media(max-width: 420px)
+  .admin-about-us-team-descr-item__text
+    height: 200px
+
